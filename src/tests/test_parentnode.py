@@ -11,7 +11,7 @@ class TestParentNode(unittest.TestCase):
     
     TEST_TAG = 'test_tag'
     TEST_CHILDREN = [1, 2, 3]
-    TEST_PROP = {'href': 'https://www.google.com', 'target': '_blank'}
+    TEST_PROP = {'href': 'https://www.google.com'}
     
     def test_create_blank_vars(self):
         node = ParentNode(None, None)
@@ -55,4 +55,21 @@ class TestParentNode(unittest.TestCase):
         self.assertEqual(
             parent_node.to_html(),
             "<div><span><b>grandchild</b></span></div>",
-    )
+        )
+
+    def test_more_children(self):
+        node = ParentNode(
+            "p",
+            [
+                LeafNode("b", "Bold text"),
+                LeafNode(None, "Normal text"),
+                LeafNode("i", "italic text"),
+                LeafNode(None, "Normal text"),
+            ],
+            )
+        self.assertEqual(
+            node.to_html(),
+            "<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>",
+        )
+
+
