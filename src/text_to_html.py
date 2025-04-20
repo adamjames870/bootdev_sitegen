@@ -36,3 +36,5 @@ def text_node_to_html_node(text_node):
         raise Exception("Invalid text type")
 
     return LeafNode(tag, value, props)
+
+
